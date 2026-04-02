@@ -2,7 +2,11 @@
 
 import { useState } from 'react';
 
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || 'YOUR_FORM_ID';
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+}
 
 interface FormState {
   isSubmitting: boolean;
@@ -11,39 +15,56 @@ interface FormState {
 }
 
 export default function EmailForm() {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    phone: '',
+  });
+
   const [formState, setFormState] = useState<FormState>({
     isSubmitting: false,
     isSuccess: false,
     error: null,
   });
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormState({ isSubmitting: true, isSuccess: false, error: null });
 
-    const formData = new FormData(e.currentTarget);
-
     try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const response = await fetch('/api/contact', {
         method: 'POST',
-        body: formData,
         headers: {
-          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+        }),
       });
 
       if (response.ok) {
         setFormState({ isSubmitting: false, isSuccess: true, error: null });
-        (e.target as HTMLFormElement).reset();
+        setFormData({ name: '', email: '', phone: '' });
         // Auto-hide success message after 5 seconds
         setTimeout(() => {
           setFormState({ isSubmitting: false, isSuccess: false, error: null });
         }, 5000);
       } else {
+        const errorData = await response.json();
         setFormState({
           isSubmitting: false,
           isSuccess: false,
-          error: 'Something went wrong. Please try again.',
+          error: errorData.error || 'Something went wrong. Please try again.',
         });
       }
     } catch {
@@ -65,6 +86,8 @@ export default function EmailForm() {
           id="name"
           name="name"
           placeholder="John Doe"
+          value={formData.name}
+          onChange={handleInputChange}
           required
           className="form-input"
         />
@@ -78,40 +101,26 @@ export default function EmailForm() {
           id="email"
           name="email"
           placeholder="you@company.com"
+          value={formData.email}
+          onChange={handleInputChange}
           required
           className="form-input"
         />
       </div>
 
-      {/* Company Input */}
+      {/* Phone Input */}
       <div>
-        <label htmlFor="company" className="form-label">Company <span className="text-gray-400">(Optional)</span></label>
+        <label htmlFor="phone" className="form-label">Phone Number</label>
         <input
-          type="text"
-          id="company"
-          name="company"
-          placeholder="Your Company"
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="+1 (555) 000-0000"
+          value={formData.phone}
+          onChange={handleInputChange}
+          required
           className="form-input"
         />
-      </div>
-
-      {/* Role Select */}
-      <div>
-        <label htmlFor="role" className="form-label">Your Role</label>
-        <select
-          id="role"
-          name="role"
-          defaultValue=""
-          required
-          className="form-select"
-        >
-          <option value="" disabled>Select your role</option>
-          <option value="investor">Real Estate Investor</option>
-          <option value="coach">Coach / Consultant</option>
-          <option value="service-provider">Service Provider</option>
-          <option value="executive">Executive / Founder</option>
-          <option value="other">Other</option>
-        </select>
       </div>
 
       {/* Submit Button */}
@@ -129,7 +138,7 @@ export default function EmailForm() {
             Submitting...
           </span>
         ) : (
-          'Get Started Today'
+          'Get Started'
         )}
       </button>
 
@@ -145,7 +154,7 @@ export default function EmailForm() {
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
             </svg>
-            Thanks! Check your email for next steps.
+            Thanks! We'll be in touch soon.
           </p>
         </div>
       )}
