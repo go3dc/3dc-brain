@@ -4,71 +4,111 @@ import FeatureCard from '@/components/FeatureCard';
 import CTA from '@/components/CTA';
 
 export const metadata: Metadata = {
-  title: 'For Real Estate Investors | 3DC Brain',
-  description: 'Designed for real estate investors: portfolio tracking, deal pipeline management, and competitive market intelligence—all automated.',
+  title: 'For Investors | 3DC Brain',
+  description: 'Scale your deal flow without scaling your team. Lead Agent + Pipeline Agent. 300–500 leads/month. First-mover advantage on off-market deals.',
 };
 
 export default function ForInvestorsPage() {
   return (
     <>
       <Hero
-        title="Built for Real Estate Investors"
-        subtitle="Track your portfolio. Manage your pipeline. Spot opportunities. All automatically."
-        backgroundGradient={false}
+        title="Scale Your Deal Flow Without Scaling Your Team"
+        subtitle="Our Lead Agent finds off-market deals in your geography and strategy. 300–500 leads per month. Pipeline Agent tracks every deal. Never miss an opportunity."
+        cta={{ label: 'Book Your Investment Strategy Call', href: '/contact' }}
       />
 
-      <section className="section bg-white">
-        <div className="container-width">
-          <h2 className="text-h2 text-navy mb-12 text-center">Investor-Specific Features</h2>
+      <section className="section-padding bg-navy">
+        <div className="container-lg px-6 md:px-12">
+          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+            <h2 className="text-h2 md:text-5xl text-white font-bold mb-6">
+              Your Challenge
+            </h2>
+            <p className="text-body-lg md:text-xl text-gray-300">
+              Deal sourcing is inconsistent. You're competing with larger operators who have full sourcing teams. Your manual outreach caps your deal volume. You need scale without hiring.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding bg-gradient-navy-charcoal">
+        <div className="container-lg px-6 md:px-12">
+          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+            <h2 className="text-h2 md:text-5xl text-white font-bold mb-6">
+              What We Deploy
+            </h2>
+            <p className="text-body-lg md:text-xl text-gray-300">
+              Lead Agent + Pipeline Agent. Work together to find deals, score them, and track them to close.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <FeatureCard
-              icon="🏠"
-              title="Deal Pipeline Management"
-              description="Track every deal from lead to close. Know which deals are stalling. Trigger action before opportunities die."
+              icon="🎯"
+              title="Lead Agent"
+              description="Identifies off-market deals in your geography, strategy, and deal size. MLS feeds, pocket listings, wholesalers, probate, distressed sales. 300–500 leads per month. Scored by equity, cap rate, and your custom criteria."
+              link={{ label: 'Learn more', href: '/revenue-operations' }}
             />
             <FeatureCard
-              icon="💼"
-              title="Portfolio Tracking"
-              description="Monitor all your properties in one dashboard. Rental income, expenses, occupancy, ROI. All real-time."
-            />
-            <FeatureCard
-              icon="📍"
-              title="Market Opportunity Spotting"
-              description="Get alerted to new investment opportunities in your target markets. Before anyone else finds them."
-            />
-            <FeatureCard
-              icon="🤝"
-              title="Wholesaler & Broker Intelligence"
-              description="Know what deals wholesalers and brokers are bringing. Track their patterns. Close first."
+              icon="⏱️"
+              title="Pipeline Agent"
+              description="Tracks every active deal. No opportunity stalls. Auto-triggers follow-ups. Surfaces revival opportunities. Weekly deal health report. Ensures no lead falls through cracks."
+              link={{ label: 'Learn more', href: '/how-it-works' }}
             />
           </div>
         </div>
       </section>
 
-      <section className="section bg-gray-50">
-        <div className="container-width text-center">
-          <h2 className="text-h2 text-navy mb-6">What Investors See in 30 Days</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card">
-              <div className="text-3xl font-bold text-cyan mb-2">5x</div>
-              <p className="text-body-md text-charcoal">More deal flow from automated lead gen</p>
+      <section className="section-padding bg-navy">
+        <div className="container-lg px-6 md:px-12">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-h3 text-white font-bold mb-8">Real Numbers</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+              <div>
+                <p className="text-3xl font-bold text-cyan">300–500</p>
+                <p className="text-body-sm text-gray-400 mt-2">Leads/month</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-cyan">50–80</p>
+                <p className="text-body-sm text-gray-400 mt-2">Qualified prospects</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-cyan">10–20</p>
+                <p className="text-body-sm text-gray-400 mt-2">Booked calls/month</p>
+              </div>
+              <div>
+                <p className="text-3xl font-bold text-cyan">3x</p>
+                <p className="text-body-sm text-gray-400 mt-2">Deal velocity vs manual</p>
+              </div>
             </div>
-            <div className="card">
-              <div className="text-3xl font-bold text-cyan mb-2">60%</div>
-              <p className="text-body-md text-charcoal">Reduction in time managing pipeline</p>
-            </div>
-            <div className="card">
-              <div className="text-3xl font-bold text-cyan mb-2">3</div>
-              <p className="text-body-md text-charcoal">More closed deals per quarter</p>
+
+            <div className="bg-charcoal/60 rounded-lg p-8 border border-cyan border-opacity-15 backdrop-blur-sm">
+              <h3 className="text-h4 font-bold text-white mb-4">Why Agents Work for Investors</h3>
+              <ul className="space-y-3 text-body-sm text-gray-300">
+                <li className="flex gap-3">
+                  <span className="text-cyan">✓</span>
+                  <span><strong>Always working.</strong> Nights, weekends, holidays. Consistent deal flow.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-cyan">✓</span>
+                  <span><strong>Off-market advantage.</strong> Finds deals your competitors miss.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-cyan">✓</span>
+                  <span><strong>Scales without hiring.</strong> Same team, 3x deal volume.</span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-cyan">✓</span>
+                  <span><strong>No emotional bias.</strong> Data-driven scoring. Best deals surface first.</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </section>
 
       <CTA
-        headline="Scale Your Real Estate Business with AI"
-        subheading="Join early access. See how we help investors close more deals faster."
+        headline="Ready to Triple Your Deal Flow?"
+        subheading="Schedule a 20-minute call. We'll design your custom lead sourcing strategy and show you the roadmap."
       />
     </>
   );

@@ -1,60 +1,192 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f1419;
-  --primary: #00d4ff;
-  --primary-dark: #0095b3;
+  --color-navy: #0F1419;
+  --color-charcoal: #1A1F2E;
+  --color-blue-primary: #0D47A1;
+  --color-cyan: #00D4FF;
+  --color-white: #FFFFFF;
+  --color-gray-light: #F3F4F6;
+  --color-gray-medium: #9CA3AF;
+  --color-gray-dark: #4B5563;
 }
 
 @layer base {
-  h1 {
-    @apply text-h1 font-bold text-navy;
-  }
-
-  h2 {
-    @apply text-h2 font-bold text-navy;
-  }
-
-  h3 {
-    @apply text-h3 font-semibold text-navy;
-  }
-
-  h4 {
-    @apply text-h4 font-semibold text-charcoal;
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-white text-charcoal font-sans;
   }
 
+  h1 {
+    @apply text-h1 font-bold text-white;
+  }
+
+  h2 {
+    @apply text-h2 font-bold text-white;
+  }
+
+  h3 {
+    @apply text-h3 font-bold text-white;
+  }
+
+  h4 {
+    @apply text-h4 font-semibold text-white;
+  }
+
+  p {
+    @apply text-body-md text-gray-300 leading-relaxed;
+  }
+
   a {
-    @apply text-cyan hover:text-cyan-dark transition-colors;
+    @apply text-cyan hover:text-cyan transition-colors duration-200;
   }
 }
 
 @layer components {
+  /* Button Components */
   .btn-primary {
-    @apply px-6 py-3 bg-cyan text-navy font-semibold rounded-lg hover:bg-cyan-light transition-colors;
+    @apply inline-block px-8 py-4 bg-gradient-to-r from-blue-primary to-blue-primary text-white font-button rounded-md shadow-elevation-2 hover:shadow-elevation-3 hover:opacity-90 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary-large {
+    @apply px-8 py-3 h-12 bg-blue-primary text-white font-semibold rounded-md shadow-elevation-2 hover:shadow-elevation-3 active:scale-95 transition-all duration-200;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 bg-navy text-white font-semibold rounded-lg hover:bg-navy-light transition-colors;
+    @apply inline-block px-8 py-4 bg-transparent border-2 border-cyan text-cyan font-semibold rounded-md hover:bg-cyan hover:text-navy transition-all duration-200;
   }
 
   .btn-outline {
-    @apply px-6 py-3 border-2 border-cyan text-cyan rounded-lg hover:bg-cyan hover:text-navy transition-colors;
+    @apply inline-block px-8 py-4 border-2 border-cyan text-cyan rounded-md hover:bg-cyan hover:text-navy transition-all duration-200;
   }
 
+  .btn-small {
+    @apply px-6 py-2 bg-cyan text-navy font-semibold rounded-md hover:opacity-90 transition-opacity duration-200;
+  }
+
+  /* Card Components */
   .card {
-    @apply bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow;
+    @apply bg-charcoal rounded-lg p-8 border border-cyan border-opacity-15 shadow-elevation-2 hover:shadow-elevation-3 hover:border-opacity-40 transition-all duration-300 hover:scale-102;
   }
 
+  .card-hover {
+    @apply hover:scale-102 hover:shadow-elevation-3;
+  }
+
+  /* Feature Card (3-column grid) */
+  .feature-card {
+    @apply bg-gradient-navy-charcoal rounded-lg p-8 border border-cyan border-opacity-15 shadow-elevation-3 hover:shadow-elevation-4 hover:border-opacity-40 transition-all duration-300 hover:-translate-y-1;
+  }
+
+  .feature-icon {
+    @apply w-12 h-12 flex items-center justify-center rounded-full bg-cyan bg-opacity-10 text-cyan mb-4;
+  }
+
+  /* Testimonial Block */
+  .testimonial-block {
+    @apply bg-charcoal bg-opacity-60 border-l-4 border-cyan rounded-lg p-8 mb-6 hover:bg-opacity-80 transition-all duration-300;
+  }
+
+  .testimonial-quote {
+    @apply text-body-lg text-white italic mb-6;
+  }
+
+  .testimonial-attribution {
+    @apply text-body-sm text-gray-300 font-semibold;
+  }
+
+  /* Input Fields */
+  .form-input {
+    @apply w-full px-4 py-3 bg-charcoal bg-opacity-80 border border-gray-500 rounded-md text-white placeholder-gray-400 focus:outline-none focus:border-cyan focus:ring-3 focus:ring-cyan focus:ring-opacity-20 transition-all duration-200;
+  }
+
+  .form-input::placeholder {
+    @apply text-gray-400;
+  }
+
+  .form-select {
+    @apply w-full px-4 py-3 bg-charcoal bg-opacity-80 border border-gray-500 rounded-md text-white focus:outline-none focus:border-cyan focus:ring-3 focus:ring-cyan focus:ring-opacity-20 transition-all duration-200;
+  }
+
+  .form-label {
+    @apply block text-body-sm font-semibold text-white mb-2;
+  }
+
+  /* Sections & Layout */
   .section {
-    @apply py-16 px-6 md:px-12 lg:px-20;
+    @apply py-20 px-6 md:px-12 lg:px-0;
+  }
+
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40;
   }
 
   .container-width {
+    @apply w-full max-w-6xl mx-auto;
+  }
+
+  .container-lg {
     @apply w-full max-w-7xl mx-auto;
+  }
+
+  /* Navigation */
+  .nav-link {
+    @apply text-body-md font-medium text-white hover:text-cyan transition-colors duration-200;
+  }
+
+  .nav-link-active {
+    @apply text-cyan border-b-2 border-cyan;
+  }
+
+  /* Dividers */
+  .divider {
+    @apply border-t border-white border-opacity-10;
+  }
+
+  .divider-glow {
+    @apply h-px bg-gradient-to-r from-transparent via-cyan to-transparent opacity-30;
+  }
+
+  /* Typography */
+  .text-subtitle {
+    @apply text-h4 font-semibold text-cyan;
+  }
+
+  .text-meta {
+    @apply text-caption text-gray-400;
+  }
+
+  .text-light {
+    @apply text-gray-300;
+  }
+
+  /* Utility Classes */
+  .transition-all-200 {
+    @apply transition-all duration-200;
+  }
+
+  .transition-all-300 {
+    @apply transition-all duration-300;
+  }
+
+  .scale-102 {
+    @apply scale-100;
+  }
+
+  .scale-102:hover {
+    @apply scale-102;
+  }
+
+  /* Backdrop */
+  .backdrop-blur-sm {
+    @apply backdrop-blur;
+  }
+
+  /* Focus Ring (Accessibility) */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2;
   }
 }

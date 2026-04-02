@@ -57,68 +57,108 @@ export default function EmailForm() {
 
   return (
     <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-4">
+      {/* Name Input */}
       <div>
+        <label htmlFor="name" className="form-label">Full Name</label>
         <input
           type="text"
+          id="name"
           name="name"
-          placeholder="Your Name"
+          placeholder="John Doe"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
+          className="form-input"
         />
       </div>
 
+      {/* Email Input */}
       <div>
+        <label htmlFor="email" className="form-label">Email Address</label>
         <input
           type="email"
+          id="email"
           name="email"
-          placeholder="Your Email"
+          placeholder="you@company.com"
           required
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
+          className="form-input"
         />
       </div>
 
+      {/* Company Input */}
       <div>
+        <label htmlFor="company" className="form-label">Company <span className="text-gray-400">(Optional)</span></label>
         <input
           type="text"
+          id="company"
           name="company"
-          placeholder="Company (Optional)"
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
+          placeholder="Your Company"
+          className="form-input"
         />
       </div>
 
+      {/* Role Select */}
       <div>
+        <label htmlFor="role" className="form-label">Your Role</label>
         <select
+          id="role"
           name="role"
           defaultValue=""
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/20"
+          required
+          className="form-select"
         >
-          <option value="">Select Your Role</option>
+          <option value="" disabled>Select your role</option>
           <option value="investor">Real Estate Investor</option>
-          <option value="coach">Coach/Consultant</option>
+          <option value="coach">Coach / Consultant</option>
           <option value="service-provider">Service Provider</option>
+          <option value="executive">Executive / Founder</option>
           <option value="other">Other</option>
         </select>
       </div>
 
+      {/* Submit Button */}
       <button
         type="submit"
         disabled={formState.isSubmitting}
-        className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full btn-primary py-3 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {formState.isSubmitting ? 'Submitting...' : 'Join Early Access'}
+        {formState.isSubmitting ? (
+          <span className="flex items-center justify-center gap-2">
+            <svg className="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.3" />
+              <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            </svg>
+            Submitting...
+          </span>
+        ) : (
+          'Get Started Today'
+        )}
       </button>
 
+      {/* Helper Text */}
+      <p className="text-caption text-gray-400 text-center mt-4">
+        We'll never share your info. Unsubscribe anytime.
+      </p>
+
+      {/* Success State */}
       {formState.isSuccess && (
-        <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-          <p className="text-green-800 font-medium">
-            ✓ Thanks for signing up! Check your email for next steps.
+        <div className="p-4 bg-success-green bg-opacity-10 border border-success-green rounded-md animate-in fade-in duration-300">
+          <p className="text-success-green font-semibold flex items-center gap-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
+            </svg>
+            Thanks! Check your email for next steps.
           </p>
         </div>
       )}
 
+      {/* Error State */}
       {formState.error && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-          <p className="text-red-800 font-medium">{formState.error}</p>
+        <div className="p-4 bg-error-red bg-opacity-10 border border-error-red rounded-md animate-in fade-in duration-300">
+          <p className="text-error-red font-semibold flex items-center gap-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+            </svg>
+            {formState.error}
+          </p>
         </div>
       )}
     </form>
